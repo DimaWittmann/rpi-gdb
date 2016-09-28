@@ -23,16 +23,16 @@ kernel.img:	loader
 	$(OBJCOPY) -O binary $< $@
 
 loader:	loader.o
-	$(CC) $^ -o $@ $(LDFLAGS) -T ldscript_loader.X
+	$(CC) $^ -o $@ $(LDFLAGS) $(CPPFLAGS)  -T ldscript_loader.X
 
 loader.o:	loader.S rsp.img
-	$(CC) -c $< -o $@ $(LDFLAGS)
+	$(CC) -c $< -o $@ $(LDFLAGS) $(CPPFLAGS) 
 
 rsp.img:	rsp
 	$(OBJCOPY) -O binary $< $@
 
 rsp:	$(OBJS)
-	$(CC) $^ -o $@ $(LDFLAGS) -T ldscript.X
+	$(CC) $^ -o $@ $(LDFLAGS) $(CPPFLAGS)  -T ldscript.X
 
 %.o:	%.c
 	$(CC) -c $< -o $@ $(CPPFLAGS)
